@@ -1,17 +1,14 @@
 import React from "react";
-import DynamicContext from "./components/DynamicContext";
-import SampleContext from "./components/SampleContext";
 import "./index.css";
+// import CusContext from "./topics/CusContext";
+import ErrorBound from "./topics/ErrorBound";
 
-const ThemeContext = React.createContext('lignt');
 
 class App extends React.Component {
   render() {
     return (
-       <ThemeContext.Provider value="dark">
-          <SampleContext />
-          <DynamicContext />
-       </ThemeContext.Provider>
+        // <CusContext />
+        <ErrorBound />
     );
   }
 }
