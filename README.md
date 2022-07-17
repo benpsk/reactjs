@@ -1,7 +1,3 @@
-# ReactJS Testing Sample 
-## checkout by branch for different sample
-
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
