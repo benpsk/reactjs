@@ -4,66 +4,53 @@ const COUNT = "count";
 const STEP = "step";
 const MAX = "max";
 
-// const getLocalStorageCount = (type) => {
-//   switch (type) {
-//     case COUNT:
-//       const count = localStorage.getItem(COUNT);
+const getLocalStorageCount = (initialState, key) => {
+  const storage = localStorage.getItem(key);
 
-//       if (count) return JSON.parse(count).count;
-//       return { count: 0 };
-
-//     case STEP:
-//       const step = localStorage.getItem(STEP);
-
-//       if (step) return JSON.parse(step).step;
-//       return { step: 1 };
-
-//     case MAX:
-//       const max = localStorage.getItem(MAX);
-
-//       if (max) return JSON.parse(max).max;
-//       return { max: 10 };
-
-//     default:
-//       return { count: 0, step: 1, max: 10 };
-//   }
-// };
-
-// const storeStateInLocalStorage = (count, step, max) => {
-//   localStorage.setItem(COUNT, JSON.stringify({ count }));
-//   localStorage.setItem(STEP, JSON.stringify({ step }));
-//   localStorage.setItem(MAX, JSON.stringify({ max }));
-// };
-
-const useLocalStorage = (initialState, key) => {
-  const get = () => {
-    const storage = localStorage.getItem(key);
-
-    if (storage.value) return JSON.parse(storage).value;
-
-    return initialState;
-  };
-  const [value, setValue] = useState(get());
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify({ value }));
-  }, [value, key]);
-
-  return [value, setValue];
+  if (storage.key) return JSON.parse(storage).key;
+  return initialState;
 };
 
+const storeStateInLocalStorage = (count, step, max) => {
+  localStorage.setItem(COUNT, JSON.stringify({ count }));
+  localStorage.setItem(STEP, JSON.stringify({ step }));
+  localStorage.setItem(MAX, JSON.stringify({ max }));
+};
+
+// const useLocalStorage = (initialState, key) => {
+//   const get = () => {
+//     const storage = localStorage.getItem(key);
+
+//     if (storage.value) return JSON.parse(storage).value;
+
+//     return initialState;
+//   };
+//   const [value, setValue] = useState(get());
+
+//   useEffect(() => {
+//     localStorage.setItem(key, JSON.stringify({ value }));
+//   }, [value, key]);
+
+//   return [value, setValue];
+// };
+
 const Counter = () => {
-  // const [count, setCount] = useState(getLocalStorageCount(COUNT));
-  // const [step, setStep] = useState(getLocalStorageCount(STEP));
-  // const [max, setMax] = useState(getLocalStorageCount(MAX));
-  // useEffect(() => {
-  //     storeStateInLocalStorage(count, step, max);
-  //   }, [count, step, max]);
+  const paramCount = getLocalStorageCount(0, COUNT);
+  const paramStep = getLocalStorageCount(1, STEP);
+  const paramMax = getLocalStorageCount(10, MAX);
+
+  const [count, setCount] = useState(paramCount);
+  const [step, setStep] = useState(paramStep);
+  const [max, setMax] = useState(paramMax);
+
+  useEffect(() => {
+    storeStateInLocalStorage(count, step, max);
+  }, [count, step, max]);
 
   // using custom hook
-  const [count, setCount] = useLocalStorage(0, COUNT);
-  const [max, setMax] = useLocalStorage(10, MAX);
-  const [step, setStep] = useLocalStorage(1, STEP);
+  // const [count, setCount] = useLocalStorage(0, COUNT);
+  // const [max, setMax] = useLocalStorage(10, MAX);
+  // const [step, setStep] = useLocalStorage(1, STEP);
 
   // simple state
   // const [count, setCount] = useState(0);
@@ -128,6 +115,6 @@ const Counter = () => {
       </div>
     </div>
   );
-};
+};;;;
 
 export default Counter;
