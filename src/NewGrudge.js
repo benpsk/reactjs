@@ -1,8 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useContext, useState } from "react";
+import { GrudgeContext } from "./GrudgeContext";
 
-const NewGrudge = memo(({ onSubmit }) => {
+const NewGrudge = memo(() => {
   const [person, setPerson] = useState("");
   const [reason, setReason] = useState("");
+
+  const { addGrudge } = useContext(GrudgeContext);
 
   console.log("Rendering New Grudge");
 
@@ -10,7 +13,7 @@ const NewGrudge = memo(({ onSubmit }) => {
     event.preventDefault();
 
     if (person && reason) {
-      onSubmit({ person, reason });
+      addGrudge({ person, reason });
       setPerson("");
       setReason("");
     }
