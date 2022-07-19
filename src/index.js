@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import CharacterList from "./CharacterList";
 
 import "./styles.scss";
-import endpoint from "./endpoint";
+import URL from "./endpoint";
 
 const initialState = {
   result: null,
@@ -65,7 +65,7 @@ const useFetch = (url) => {
 };
 
 const Application = () => {
-  const [response, loading, error] = useFetch(endpoint + "/characters");
+  const [response, loading, error] = useFetch(URL + "/characters");
   const characters = (response && response.characters) || [];
 
   return (
